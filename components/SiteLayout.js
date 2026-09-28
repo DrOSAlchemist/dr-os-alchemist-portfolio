@@ -57,6 +57,9 @@ export default function SiteLayout({ children }) {
             <a href="https://github.com/DrOSAlchemist" target="_blank" rel="noreferrer">
               GitHub <ArrowUpRight aria-hidden="true" size={13} />
             </a>
+            <a href="https://www.linkedin.com/in/jsanni/" target="_blank" rel="noreferrer">
+              LinkedIn <ArrowUpRight aria-hidden="true" size={13} />
+            </a>
           </div>
         </footer>
       </div>
