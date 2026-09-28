@@ -22,8 +22,9 @@ export default function ArticlePage({ article }) {
       <Head>
         <title>{article.title} | DrOSAlchemist</title>
         <meta name="description" content={article.excerpt} />
-        <meta property="og:title" content={article.title} />
-        <meta property="og:description" content={article.excerpt} />
+        <meta property="og:type" content="article" key="og-type" />
+        <meta property="og:title" content={article.title} key="og-title" />
+        <meta property="og:description" content={article.excerpt} key="og-description" />
       </Head>
       <article className="site-shell page-main article-page">
         <Link className="back-link" href="/writing"><ArrowLeft aria-hidden="true" size={15} /> All field notes</Link>

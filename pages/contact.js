@@ -8,6 +8,8 @@ export default function Contact() {
       <Head>
         <title>Connect | DrOSAlchemist</title>
         <meta name="description" content="Connect with DrOSAlchemist about AI/ML infrastructure, Kubernetes and network systems." />
+        <meta property="og:title" content="Connect | DrOSAlchemist" key="og-title" />
+        <meta property="og:description" content="Connect with DrOSAlchemist about AI/ML infrastructure, Kubernetes and network systems." key="og-description" />
       </Head>
       <div className="site-shell page-main contact-page">
         <div className="page-kicker">Connect / start with the problem</div>

@@ -17,6 +17,8 @@ export default function About() {
       <Head>
         <title>About | DrOSAlchemist</title>
         <meta name="description" content="Meet DrOSAlchemist, an AI/ML and network systems engineer focused on secure, observable platforms." />
+        <meta property="og:title" content="About | DrOSAlchemist" key="og-title" />
+        <meta property="og:description" content="Meet DrOSAlchemist, an AI/ML and network systems engineer focused on secure, observable platforms." key="og-description" />
       </Head>
       <div className="site-shell page-main">
         <div className="page-kicker">About / the operator behind the systems</div>

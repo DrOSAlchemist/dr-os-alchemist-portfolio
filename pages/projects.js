@@ -54,6 +54,8 @@ export default function Projects({ repos, username, unavailable }) {
       <Head>
         <title>Projects | DrOSAlchemist</title>
         <meta name="description" content="A live index of public DrOSAlchemist GitHub repositories and systems projects." />
+        <meta property="og:title" content="Projects | DrOSAlchemist" key="og-title" />
+        <meta property="og:description" content="A live index of public DrOSAlchemist GitHub repositories and systems projects." key="og-description" />
       </Head>
       <div className="site-shell page-main">
         <div className="page-kicker"><CodeXml aria-hidden="true" size={14} /> Project index / public repositories</div>

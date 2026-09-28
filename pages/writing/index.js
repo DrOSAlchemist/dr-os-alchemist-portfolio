@@ -9,6 +9,8 @@ export default function Writing() {
       <Head>
         <title>Writing | DrOSAlchemist</title>
         <meta name="description" content="Field notes on AI infrastructure, Kubernetes, platform networking and reliable operations." />
+        <meta property="og:title" content="Writing | DrOSAlchemist" key="og-title" />
+        <meta property="og:description" content="Field notes on AI infrastructure, Kubernetes, platform networking and reliable operations." key="og-description" />
       </Head>
       <div className="site-shell page-main">
         <div className="page-kicker">Writing / field notes from connected systems</div>

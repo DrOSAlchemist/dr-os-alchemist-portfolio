@@ -35,10 +35,11 @@ export default function Home() {
           name="description"
           content="DrOSAlchemist builds secure, observable infrastructure for AI/ML, Kubernetes, and connected systems."
         />
-        <meta property="og:title" content="DrOSAlchemist | Systems, made useful" />
+        <meta property="og:title" content="DrOSAlchemist | Systems, made useful" key="og-title" />
         <meta
           property="og:description"
           content="AI infrastructure, Kubernetes, networking and security, brought together."
+          key="og-description"
         />
       </Head>
 
