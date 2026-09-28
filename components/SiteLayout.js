@@ -6,13 +6,16 @@ import BrandMark from "./BrandMark";
 import { siteUrl, socialImageUrl } from "@/lib/site";
 
 const navigation = [
-  { label: "About", href: "/about" },
-  { label: "Projects", href: "/projects" },
-  { label: "Writing", href: "/writing" },
+  { label: "GitHub", href: "/#github" },
+  { label: "Skills", href: "/#skills" },
+  { label: "Automation", href: "/#automations" },
+  { label: "Experience", href: "/#experience" },
+  { label: "Tools", href: "/#tools" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function SiteLayout({ children }) {
-  const { pathname, asPath } = useRouter();
+  const { asPath } = useRouter();
   const canonicalPath = (asPath.split(/[?#]/)[0] || "/").replace(/\/+$/, "") || "/";
   const canonicalUrl = `${siteUrl}${canonicalPath}`;
 
@@ -41,13 +44,11 @@ export default function SiteLayout({ children }) {
           </Link>
           <nav className="primary-nav" aria-label="Primary navigation">
             {navigation.map((item) => {
-              const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
               return (
                 <Link
-                  className={isActive ? "nav-link nav-link-active" : "nav-link"}
+                  className="nav-link"
                   href={item.href}
                   key={item.href}
-                  aria-current={isActive ? "page" : undefined}
                 >
                   {item.label}
                 </Link>
