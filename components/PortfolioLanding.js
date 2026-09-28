@@ -47,6 +47,13 @@ const featuredProjects = [
     description: "A Helm-based deployment of an Elixir Phoenix application with PostgreSQL, environment configuration, database migrations, health probes and public ingress.",
     tags: ["Kubernetes", "Helm", "Docker", "PostgreSQL", "SRE"],
   },
+  {
+    name: "devops-mlops-reference-platform",
+    title: "DevOps / MLOps reference platform",
+    category: "AI WORKFLOWS / SRE / FINOPS",
+    description: "A local-first workflow policy scanner, cost-report CLI, guarded Bedrock/Vertex/Azure OpenAI examples, multi-cloud Terraform, Helm deployment, and Prometheus/Grafana/ELK observability starters.",
+    tags: ["AI guardrails", "Python", "Terraform", "Kubernetes", "Prometheus", "FinOps"],
+  },
 ];
 
 const experienceAreas = [
