@@ -1,40 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# DrOSAlchemist
 
-## Getting Started
+A multi-page portfolio for AI/ML infrastructure, Kubernetes, network systems and platform security. Built with the Next.js Pages Router, locally bundled typefaces, and a live public-repository view backed by GitHub's REST API.
 
-First, run the development server:
+## Routes
 
-```bash
+- `/` — systems-focused portfolio home
+- `/about` — profile, principles and areas of focus
+- `/projects` — automatically refreshed public GitHub repositories for `DrOSAlchemist`
+- `/writing` — AI/ML, Kubernetes and networking field notes
+- `/writing/[slug]` — statically generated articles
+- `/contact` — public GitHub contact route
+
+## Development
+
+Requires Node.js 22 or newer.
+
+```sh
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`. Run `npm run lint` and `npm run build` before publishing.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+The projects page reads `GITHUB_USERNAME` on the server, defaulting to `DrOSAlchemist`. It lists only public, non-fork, non-archived repositories and caches the response at the CDN for one hour. No GitHub token is needed or exposed to browsers.
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Netlify
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+`netlify.toml` sets the production build command and Node version. Netlify detects Next.js and applies its maintained adapter automatically; this project intentionally does not pin an adapter version. To enable continuous deployment, connect this GitHub repository as a site in the Netlify dashboard and select `main` as the production branch. Netlify will build production deploys from `main` and deploy previews for pull requests. The GitHub Actions workflow independently runs lint and build checks.
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Optionally set `GITHUB_USERNAME` in Netlify environment variables to use a different public account. No deploy token or account credential belongs in the repository.
 
-## Learn More
+## Brand
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+The mark combines two crossing signal paths around a catalyst point. Colors, type, voice and usage notes are in [docs/brand-identity.md](docs/brand-identity.md). The profile image is a locally cached public GitHub avatar.

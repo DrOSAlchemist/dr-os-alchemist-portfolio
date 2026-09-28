@@ -1,82 +1,173 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+import Head from "next/head";
+import Link from "next/link";
+import { ArrowDownRight, ArrowUpRight, Boxes, Network, ShieldCheck } from "lucide-react";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const disciplines = [
+  {
+    number: "01",
+    title: "AI / ML platforms",
+    text: "The GPU-aware infrastructure that takes experiments to reliable inference.",
+    icon: Boxes,
+    color: "mint",
+  },
+  {
+    number: "02",
+    title: "Networks & naming",
+    text: "DNS, IPAM, traffic flow and the connective tissue behind every service.",
+    icon: Network,
+    color: "blue",
+  },
+  {
+    number: "03",
+    title: "Security by design",
+    text: "Identity, policy and observability built into the operating model.",
+    icon: ShieldCheck,
+    color: "coral",
+  },
+];
 
 export default function Home() {
   return (
-    <div
-      className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black`}
-    >
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <>
+      <Head>
+        <title>DrOSAlchemist | AI platforms, networks &amp; systems</title>
+        <meta
+          name="description"
+          content="DrOSAlchemist builds secure, observable infrastructure for AI/ML, Kubernetes, and connected systems."
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              index.js
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs/pages/getting-started?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+        <meta property="og:title" content="DrOSAlchemist | Systems, made useful" />
+        <meta
+          property="og:description"
+          content="AI infrastructure, Kubernetes, networking and security, brought together."
+        />
+      </Head>
+
+      <div className="home-page">
+        <section className="hero-section">
+          <div className="hero-copy">
+            <p className="eyebrow"><span className="status-dot" /> Independent systems engineer</p>
+            <h1>
+              Infrastructure
+              <br />
+              for <span className="hero-highlight">intelligence.</span>
+            </h1>
+            <p className="hero-lede">
+              I connect AI/ML, Kubernetes, networking and security into systems
+              people can actually operate.
+            </p>
+            <div className="hero-actions">
+              <Link className="button button-dark" href="/projects">
+                Explore the work <ArrowUpRight aria-hidden="true" size={17} />
+              </Link>
+              <Link className="text-link" href="/writing">
+                Read the field notes <ArrowDownRight aria-hidden="true" size={16} />
+              </Link>
+            </div>
+            <div className="hero-footnote">
+              <span className="mono-label">CURRENTLY EXPLORING</span>
+              <span>GPU scheduling · platform networking · safe change</span>
+            </div>
+          </div>
+
+          <div className="system-visual" aria-label="Illustrated map of a connected AI platform">
+            <div className="visual-topline">
+              <span className="mono-label">SYSTEM MAP / 001</span>
+              <span className="visual-state">OPERATIONAL <i /></span>
+            </div>
+            <div className="system-map">
+              <div className="map-label map-label-top">CONTROL PLANE</div>
+              <div className="map-node node-gateway">
+                <span className="node-index">EDGE / 01</span>
+                <strong>Gateway</strong>
+                <span>identity · policy</span>
+              </div>
+              <div className="map-node node-scheduler">
+                <span className="node-index">CLUSTER / 02</span>
+                <strong>Scheduler</strong>
+                <span>queues · GPU pools</span>
+              </div>
+              <div className="map-node node-inference">
+                <span className="node-index">RUNTIME / 03</span>
+                <strong>Inference</strong>
+                <span>models · signals</span>
+              </div>
+              <div className="map-node node-network">
+                <span className="node-index">FABRIC / 04</span>
+                <strong>Network</strong>
+                <span>DNS · IPAM · routes</span>
+              </div>
+              <div className="map-link link-one"><span /></div>
+              <div className="map-link link-two"><span /></div>
+              <div className="map-link link-three"><span /></div>
+              <div className="map-link link-four"><span /></div>
+              <div className="map-center-mark"><span>OS</span></div>
+              <div className="map-label map-label-bottom">OBSERVABILITY / ALWAYS ON</div>
+            </div>
+            <div className="visual-footline">
+              <span>Composable by design.</span>
+              <span className="mono-label">LAT 37.7749° N</span>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-block discipline-section">
+          <div className="section-intro">
+            <p className="eyebrow">One operating picture</p>
+            <h2>Different layers.<br /><span>One system.</span></h2>
+            <p className="section-copy">
+              Durable platforms happen at the boundaries: where models meet
+              compute, where services meet networks, and where change meets policy.
+            </p>
+          </div>
+          <div className="discipline-list">
+            {disciplines.map(({ number, title, text, icon: Icon, color }) => (
+              <article className="discipline-row" key={number}>
+                <span className="discipline-number">{number}</span>
+                <span className={`discipline-icon ${color}`}><Icon aria-hidden="true" size={20} strokeWidth={1.7} /></span>
+                <div>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </div>
+                <ArrowUpRight className="row-arrow" aria-hidden="true" size={19} />
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="feature-band">
+          <div className="feature-band-label">
+            <span className="mono-label">FIELD NOTE / 01</span>
+            <span className="feature-rule" />
+          </div>
+          <div className="feature-band-copy">
+            <p className="eyebrow">Latest from the lab</p>
+            <h2>Make the GPU a first-class citizen in Kubernetes.</h2>
+            <p>
+              Scheduling is a product decision: shape queues, capacity and
+              isolation around the workload, not the other way around.
+            </p>
+            <Link className="text-link" href="/writing/gpu-aware-kubernetes-scheduling">
+              Read the note <ArrowUpRight aria-hidden="true" size={16} />
+            </Link>
+          </div>
+          <div className="feature-diagram" aria-hidden="true">
+            <div className="rack rack-a"><span /><span /><span /></div>
+            <div className="rack rack-b"><span /><span /><span /></div>
+            <div className="diagram-bus" />
+            <div className="diagram-pulse pulse-one" />
+            <div className="diagram-pulse pulse-two" />
+            <span className="diagram-caption">GPU POOL / INFERENCE</span>
+          </div>
+        </section>
+
+        <section className="closing-strip">
+          <p className="eyebrow">The useful question</p>
+          <h2>What should be easier<br /><em>to operate tomorrow?</em></h2>
+          <Link className="button button-outline" href="/contact">
+            Start a conversation <ArrowUpRight aria-hidden="true" size={17} />
+          </Link>
+        </section>
+      </div>
+    </>
   );
 }
