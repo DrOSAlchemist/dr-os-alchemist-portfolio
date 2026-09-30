@@ -27,6 +27,14 @@ const expertise = [
 
 const featuredProjects = [
   {
+    name: "keda-scale-zero-gpu-inference",
+    title: "Queue-driven GPU inference",
+    category: "AI INFRASTRUCTURE / KUBERNETES / FINOPS",
+    description: "A FastAPI and Redis inference queue that wakes a CPU worker and GPU vLLM pod with KEDA, then records the cold, warm and scale-down cycle. Includes replay of interrupted jobs and a GKE deployment guide; cloud performance is not yet benchmarked.",
+    tags: ["Python", "KEDA", "Redis", "vLLM", "Kubernetes", "GKE"],
+    noteSlug: "queue-driven-gpu-inference",
+  },
+  {
     name: "dns-migration-automation",
     title: "Multi-cloud DNS migration automation",
     category: "CLOUD / NETWORK / AUTOMATION",
@@ -185,9 +193,15 @@ export default function PortfolioLanding({ repos, username, unavailable }) {
                       <h3>{project.title}</h3>
                       <p>{project.description}</p>
                       <div className="resume-tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
-                      <a className="text-link" href={repo.url} target="_blank" rel="noreferrer">
-                        {repo.name} <ArrowUpRight aria-hidden="true" size={14} />
-                      </a>
+                      {project.noteSlug ? (
+                        <Link className="text-link" href={`/writing/${project.noteSlug}`}>
+                          Read the design note <ArrowUpRight aria-hidden="true" size={14} />
+                        </Link>
+                      ) : (
+                        <a className="text-link" href={repo.url} target="_blank" rel="noreferrer">
+                          {repo.name} <ArrowUpRight aria-hidden="true" size={14} />
+                        </a>
+                      )}
                     </article>
                   );
                 })}
