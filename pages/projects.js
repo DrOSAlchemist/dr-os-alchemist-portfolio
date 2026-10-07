@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { ArrowUpRight, CodeXml, GitFork, Star } from "lucide-react";
 import { getPublicRepositories } from "@/lib/github";
+import FeaturedProjects from "@/components/FeaturedProjects";
 
 function formatDate(value) {
   if (!value) return "Recently updated";
@@ -26,8 +27,8 @@ export default function Projects({ repos, username, unavailable }) {
           <div>
             <h1 className="page-title">Built in the<br /><span>open.</span></h1>
             <p className="page-lede">
-              Public repositories from <strong>{username}</strong>, loaded directly
-              from GitHub and sorted by most recently pushed.
+              Curated engineering evidence plus public repositories from <strong>{username}</strong>.
+              The live stream below is loaded from GitHub and sorted by most recently pushed.
             </p>
           </div>
           <a className="button button-dark" href={`https://github.com/${username}?tab=repositories`} target="_blank" rel="noreferrer">
@@ -37,7 +38,13 @@ export default function Projects({ repos, username, unavailable }) {
 
         <div className="page-divider" />
         <div className="section-heading-row">
-          <h2>Repository stream <span className="repo-count">{repos.length.toString().padStart(2, "0")}</span></h2>
+          <h2>Selected engineering evidence</h2>
+          <p>Code, verification and explicit boundaries</p>
+        </div>
+        <FeaturedProjects />
+        <div className="page-divider" />
+        <div className="section-heading-row">
+          <h2>Repository stream <span className="repo-count">{unavailable ? "Unavailable" : repos.length.toString().padStart(2, "0")}</span></h2>
           <p>Live public data · refreshed at request</p>
         </div>
 

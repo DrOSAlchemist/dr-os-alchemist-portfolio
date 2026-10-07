@@ -9,7 +9,7 @@ const principles = [
   { number: "03", title: "Secure the seams", text: "Identity, policy and network boundaries matter most where components meet." },
 ];
 
-const skills = ["Kubernetes", "AI / ML infrastructure", "GPU scheduling", "DNS & IPAM", "Cloud networking", "Platform security", "Observability", "GitOps"];
+const skills = ["Kubernetes", "AI / ML infrastructure", "Python / APIs", "GPU scheduling", "DNS & IPAM", "Security controls", "CI verification", "GitOps design"];
 
 export default function About() {
   return (
@@ -26,7 +26,7 @@ export default function About() {
         <div className="about-grid">
           <div className="prose">
             <p>
-              I&apos;m DrOSAlchemist, an AI/ML and network systems engineer. My
+              I&apos;m DrOSAlchemist, an independent systems engineer. My
               work lives at the intersection of model infrastructure, Kubernetes,
               networking and security: the pieces that make a platform useful
               after the demo is over.
@@ -38,9 +38,10 @@ export default function About() {
               Connecting those details is where reliable systems take shape.
             </p>
             <p>
-              This site is a working notebook: selected engineering projects,
-              field notes and ideas about building infrastructure that stays
-              understandable under pressure.
+              This portfolio connects implementation to evidence: source code,
+              test contracts, dated measurements and explicit limitations.
+              It distinguishes runnable demos from reference architectures,
+              and design goals from verified production behavior.
             </p>
             <div className="skill-cloud" aria-label="Areas of focus">
               {skills.map((skill) => <span className="skill-tag" key={skill}>{skill}</span>)}

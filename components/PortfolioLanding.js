@@ -3,71 +3,26 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowDownRight, ArrowUpRight, Boxes, CodeXml, Network, ShieldCheck } from "lucide-react";
 import { articles } from "@/lib/articles";
+import FeaturedProjects from "@/components/FeaturedProjects";
 
 const expertise = [
   {
-    title: "AI workflows & model ops",
-    items: ["Model infrastructure", "GPU scheduling", "Workflow verification"],
+    title: "AI infrastructure & Kubernetes",
+    items: ["KEDA / vLLM", "GPU scheduling", "Queue recovery", "Model rollout design"],
     icon: Boxes,
     color: "mint",
   },
   {
-    title: "Cloud platforms & SRE",
-    items: ["AWS", "Azure", "Google Cloud", "Kubernetes", "Helm"],
+    title: "Software & operations automation",
+    items: ["Python / APIs", "Validation contracts", "Terraform / Helm", "CI verification"],
     icon: Network,
     color: "blue",
   },
   {
-    title: "Data, network & security",
-    items: ["DNS / IPAM", "Log validation", "Container hygiene", "GitOps"],
+    title: "Security & system boundaries",
+    items: ["AI policy checks", "Independent verification", "DNS / IPAM", "Supply-chain hygiene"],
     icon: ShieldCheck,
     color: "coral",
-  },
-];
-
-const featuredProjects = [
-  {
-    name: "agentic-sre-platform",
-    title: "Evidence-backed agentic SRE",
-    category: "SRE / AI GUARDRAILS / SECURE DELIVERY",
-    description: "An offline EC2 quota incident demonstrator with deterministic diagnosis, policy-bounded Terraform proposals, SQLite audit history and recovery verification. Includes 19 tests and a staged Argo CD, Keycloak, Harbor and Vault integration design; live AWS and AI integrations are not yet implemented.",
-    tags: ["Python", "SRE", "Terraform proposals", "AI guardrails", "GitOps roadmap"],
-  },
-  {
-    name: "keda-scale-zero-gpu-inference",
-    title: "Queue-driven GPU inference",
-    category: "AI INFRASTRUCTURE / KUBERNETES / FINOPS",
-    description: "A FastAPI and Redis inference queue that wakes a CPU worker and GPU vLLM pod with KEDA, then records the cold, warm and scale-down cycle. Includes replay of interrupted jobs and a GKE deployment guide; cloud performance is not yet benchmarked.",
-    tags: ["Python", "KEDA", "Redis", "vLLM", "Kubernetes", "GKE"],
-    noteSlug: "queue-driven-gpu-inference",
-  },
-  {
-    name: "dns-migration-automation",
-    title: "Multi-cloud DNS migration automation",
-    category: "CLOUD / NETWORK / AUTOMATION",
-    description: "Provider-neutral zone validation, record diffs, snapshots, recovery attempts, propagation checks and read-only IPAM lookup across Cloudflare, AWS Route 53, Google Cloud DNS, Azure DNS and TCPWave.",
-    tags: ["Python", "AWS", "Azure", "Google Cloud", "Cloudflare", "IPAM"],
-  },
-  {
-    name: "dynamo-log-report-fix",
-    title: "Agent-task integrity & log validation",
-    category: "AI WORKFLOWS / DATA / SECURITY",
-    description: "A Terminal-Bench log-report task hardened with a digest-pinned container, removal of a leaked reference solution, and an independent verifier that recomputes report metrics from the source log.",
-    tags: ["Python", "Agent evaluation", "Data validation", "Supply-chain hygiene"],
-  },
-  {
-    name: "sre-helm-chart",
-    title: "SRE deployment with Kubernetes & Helm",
-    category: "SRE / CONTAINERS / DATA",
-    description: "A Helm-based deployment of an Elixir Phoenix application with PostgreSQL, environment configuration, database migrations, health probes and public ingress.",
-    tags: ["Kubernetes", "Helm", "Docker", "PostgreSQL", "SRE"],
-  },
-  {
-    name: "devops-mlops-reference-platform",
-    title: "DevOps / MLOps reference platform",
-    category: "AI WORKFLOWS / SRE / FINOPS",
-    description: "A local-first workflow policy scanner, cost-report CLI, guarded Bedrock/Vertex/Azure OpenAI examples, multi-cloud Terraform, Helm deployment, and Prometheus/Grafana/ELK observability starters.",
-    tags: ["AI guardrails", "Python", "Terraform", "Kubernetes", "Prometheus", "FinOps"],
   },
 ];
 
@@ -93,18 +48,27 @@ const experienceAreas = [
     href: "/writing/safe-model-rollouts",
     label: "Field note",
   },
+  {
+    number: "04",
+    title: "Evidence-backed SRE & AI boundaries",
+    text: "Typed inputs, refusal paths, bounded proposals and recovery checks—with source code and explicit limitations.",
+    href: "/writing/evidence-backed-agentic-sre",
+    label: "Implementation / design note",
+  },
 ];
 
 const toolGroups = [
   { title: "Cloud & infrastructure", items: ["AWS Route 53", "Azure DNS", "Google Cloud DNS", "Cloudflare", "TCPWave"] },
-  { title: "SRE & delivery", items: ["Kubernetes", "Helm", "Docker", "GitHub Actions", "GitOps"] },
-  { title: "Data & workflow integrity", items: ["Python", "HCL / Terraform", "Log validation", "Independent verification"] },
+  { title: "AI & Kubernetes", items: ["Kubernetes", "KEDA", "vLLM", "FastAPI", "Redis", "Helm"] },
+  { title: "Code & verification", items: ["Python", "JavaScript", "SQLite", "GitHub Actions", "Ruff", "Bandit", "Independent verification"] },
+  { title: "Delivery & security design", items: ["Docker", "HCL / Terraform", "AI policy contracts", "GitOps architecture", "Recovery runbooks"] },
 ];
 
-function formatDate(value) {
-  if (!value) return "Recently updated";
-  return new Intl.DateTimeFormat("en", { year: "numeric", month: "short" }).format(new Date(value));
-}
+const engineeringPractices = [
+  { title: "Specify the contract", text: "Make inputs, invariants, ownership and failure behavior explicit before automating changes." },
+  { title: "Test the unsafe path", text: "Reject stale evidence, unsupported changes and invalid output; exercise recovery as well as success." },
+  { title: "Expose the proof", text: "Link code, tests and dated measurements. Label reference designs and roadmap work as such." },
+];
 
 export default function PortfolioLanding({ repos, username, unavailable }) {
   const repoByName = new Map(repos.map((repo) => [repo.name, repo]));
@@ -112,15 +76,15 @@ export default function PortfolioLanding({ repos, username, unavailable }) {
   return (
     <>
       <Head>
-        <title>DrOSAlchemist | AI infrastructure, networks &amp; systems</title>
+        <title>DrOSAlchemist | Kubernetes, AI &amp; security engineering</title>
         <meta
           name="description"
-          content="AI/ML infrastructure, Kubernetes, network systems and automation built to stay understandable and operable in production."
+          content="Open-source Kubernetes and AI infrastructure, security-conscious automation and evidence-backed engineering. Explore code, tests, measured results and design boundaries."
         />
         <meta property="og:title" content="DrOSAlchemist | Systems, made useful" key="og-title" />
         <meta
           property="og:description"
-          content="AI infrastructure, Kubernetes, networking and security, brought together."
+          content="Kubernetes, AI infrastructure, security-conscious automation and code you can inspect."
           key="og-description"
         />
       </Head>
@@ -130,22 +94,22 @@ export default function PortfolioLanding({ repos, username, unavailable }) {
           <div className="resume-hero-copy">
             <p className="eyebrow"><span className="status-dot" /> Independent systems engineer</p>
             <h1>DrOSAlchemist</h1>
-            <p className="resume-role">AI/ML workflows <span>·</span> DevOps / SRE <span>·</span> Multi-cloud</p>
+            <p className="resume-role">Kubernetes &amp; AI <span>·</span> Security-conscious automation <span>·</span> Open source</p>
             <p className="resume-lede">
-              I connect AI/ML, Kubernetes, networking and security into systems people can
-              actually operate. The work focuses on the details that make platforms visible,
-              safe to change and useful after launch.
+              I build code and infrastructure at the boundaries of Kubernetes, AI,
+              networking and security. Explore working implementations, explicit
+              failure paths and documented measurements—not just architecture diagrams.
             </p>
             <div className="resume-actions">
               <a className="button button-dark" href="#github">
                 View GitHub projects <ArrowDownRight aria-hidden="true" size={16} />
               </a>
-              <a className="button button-light" href="https://www.linkedin.com/in/jsanni/" target="_blank" rel="noreferrer">
-                LinkedIn <ArrowUpRight aria-hidden="true" size={15} />
-              </a>
+              <Link className="button button-light" href="/writing/evidence-backed-agentic-sre">
+                Explore an engineering case study <ArrowUpRight aria-hidden="true" size={15} />
+              </Link>
             </div>
             <div className="resume-stats" aria-label="Portfolio at a glance">
-              <div><strong>{repos.length}</strong><span>Public repositories</span></div>
+              <div><strong>{unavailable ? "Unavailable" : repos.length}</strong><span>Live public repository count</span></div>
               <div><strong>{articles.length}</strong><span>Field notes</span></div>
               <div><strong>AI · SRE · CLOUD</strong><span>Areas of focus</span></div>
             </div>
@@ -162,58 +126,35 @@ export default function PortfolioLanding({ repos, username, unavailable }) {
           </figure>
         </section>
 
+        <section className="engineering-practices site-shell" aria-label="Engineering approach">
+          {engineeringPractices.map((practice) => (
+            <article key={practice.title}>
+              <h2>{practice.title}</h2>
+              <p>{practice.text}</p>
+            </article>
+          ))}
+        </section>
+
         <section className="resume-section resume-projects" id="github">
           <div className="site-shell">
             <div className="resume-section-heading">
               <div>
-                <p className="eyebrow">Open source / live from GitHub</p>
+                <p className="eyebrow">Open source / curated implementation evidence</p>
                 <h2>Projects built in the open.</h2>
-                <p className="section-copy">Selected work in AI workflow integrity, SRE, data validation, security hygiene and multi-cloud infrastructure.</p>
+                <p className="section-copy">Each project identifies what is implemented, where to inspect the evidence and what remains unverified. The complete public repository stream is available in the project index.</p>
               </div>
-              <a className="text-link" href={`https://github.com/${username}?tab=repositories`} target="_blank" rel="noreferrer">
+              <Link className="text-link" href="/projects">
                 All repositories <ArrowUpRight aria-hidden="true" size={15} />
-              </a>
+              </Link>
             </div>
             {unavailable && (
               <p className="notice-line" role="status">
                 {unavailable === "rate-limit"
-                  ? "GitHub has temporarily limited this request. Visit the profile for the latest public work."
-                  : "GitHub is not responding right now. Please try again shortly."}
+                  ? "GitHub has temporarily limited live metadata. Curated project links remain available; the live repository count is unavailable."
+                  : "GitHub live metadata is unavailable. Curated project links remain available; they are not a live availability check."}
               </p>
             )}
-            {!unavailable && featuredProjects.every((project) => !repoByName.has(project.name)) && (
-              <p className="notice-line" role="status">The featured repositories could not be loaded. Visit the GitHub profile for the project list.</p>
-            )}
-            {!unavailable && (
-              <div className="featured-project-grid">
-                {featuredProjects.map((project) => {
-                  const repo = repoByName.get(project.name);
-                  if (!repo) return null;
-                  return (
-                    <article className="featured-project" key={project.name}>
-                      <div className="featured-project-topline">
-                        <span className="mono-label">{project.category}</span>
-                        <a href={repo.url} target="_blank" rel="noreferrer" aria-label={`Open ${repo.name} on GitHub`}>
-                          <ArrowUpRight aria-hidden="true" size={18} />
-                        </a>
-                      </div>
-                      <h3>{project.title}</h3>
-                      <p>{project.description}</p>
-                      <div className="resume-tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
-                      {project.noteSlug ? (
-                        <Link className="text-link" href={`/writing/${project.noteSlug}`}>
-                          Read the design note <ArrowUpRight aria-hidden="true" size={14} />
-                        </Link>
-                      ) : (
-                        <a className="text-link" href={repo.url} target="_blank" rel="noreferrer">
-                          {repo.name} <ArrowUpRight aria-hidden="true" size={14} />
-                        </a>
-                      )}
-                    </article>
-                  );
-                })}
-              </div>
-            )}
+            <FeaturedProjects />
           </div>
         </section>
 
@@ -275,7 +216,7 @@ export default function PortfolioLanding({ repos, username, unavailable }) {
               <div>
                 <p className="eyebrow">Experience / systems in practice</p>
                 <h2>Work at the boundaries.</h2>
-                <p className="section-copy">The through-line is making complex infrastructure visible, reviewable and reversible.</p>
+                <p className="section-copy">Project-backed engineering practice—not an invented employment history. Follow the code and design notes for scope, tradeoffs and failure modes.</p>
               </div>
             </div>
             <div className="experience-list">
@@ -305,7 +246,7 @@ export default function PortfolioLanding({ repos, username, unavailable }) {
           <div className="site-shell">
             <div className="resume-section-heading">
               <div>
-                <p className="eyebrow">Complete tool stack</p>
+                <p className="eyebrow">Tools used in code and reference designs</p>
                 <h2>Tools serve the system.</h2>
               </div>
             </div>

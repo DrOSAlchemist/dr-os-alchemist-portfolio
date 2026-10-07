@@ -291,6 +291,22 @@ main { min-height: 70vh; }
 .featured-project > p { margin: 0 0 17px; color: var(--muted); font-size: 13px; line-height: 1.65; }
 .featured-project .resume-tags { margin-bottom: 19px; }
 .featured-project .text-link { margin-top: auto; font-family: var(--mono); font-size: 10px; overflow-wrap: anywhere; }
+.engineering-practices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; padding-bottom: 48px; }
+.engineering-practices article { padding-top: 16px; border-top: 2px solid var(--blue); }
+.engineering-practices h2 { margin: 0 0 8px; font-size: 17px; }
+.engineering-practices p { margin: 0; color: var(--ink-soft); font-size: 13px; line-height: 1.65; }
+.project-status { margin-top: 16px; padding: 5px 8px; color: var(--ink); background: var(--lime); font-family: var(--mono); font-size: 10px; }
+.featured-project .project-status + h3 { margin-top: 13px; }
+.project-evidence { margin: 0 0 18px; padding-top: 12px; border-top: 1px solid var(--line); }
+.project-evidence div + div { margin-top: 12px; }
+.project-evidence dt { margin-bottom: 4px; color: var(--blue); font-family: var(--mono); font-size: 10px; text-transform: uppercase; }
+.project-evidence dd { margin: 0; color: var(--ink-soft); font-size: 12px; line-height: 1.6; }
+.project-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: auto; }
+.article-references { margin-block: 32px; padding-top: 20px; border-top: 1px solid var(--line); }
+.article-references h2 { font-size: 22px; }
+.article-references li { margin-block: 12px; line-height: 1.6; }
+.article-references a { text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.article-references svg { vertical-align: middle; }
 .resume-expertise-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; }
 .resume-expertise { min-width: 0; padding-top: 19px; border-top: 2px solid var(--ink); }
 .resume-expertise:nth-child(2) { border-color: var(--blue); }
@@ -319,7 +335,7 @@ main { min-height: 70vh; }
 .experience-row p { max-width: 740px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
 .experience-row > svg { color: var(--coral); }
 .resume-tools { background: rgba(247, 250, 247, .55); }
-.tool-groups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.tool-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
 .tool-group { min-width: 0; }
 .tool-group h3 { margin: 0 0 13px; font-size: 15px; font-weight: 600; }
 .resume-writing-link { display: flex; align-items: flex-start; gap: 13px; margin-top: 31px; padding-top: 17px; border-top: 1px solid var(--line); color: var(--blue); }
@@ -431,7 +447,7 @@ main { min-height: 70vh; }
   .resume-section { padding-block: 53px 58px; }
   .resume-section-heading { align-items: flex-start; flex-direction: column; gap: 14px; margin-bottom: 23px; }
   .resume-section-heading h2 { font-size: 30px; }
-  .resume-repo-grid, .resume-expertise-grid, .automation-grid, .tool-groups { grid-template-columns: 1fr; }
+  .resume-repo-grid, .resume-expertise-grid, .automation-grid, .tool-groups, .engineering-practices { grid-template-columns: 1fr; }
   .resume-repo-grid .repo-card { min-height: 190px; }
   .featured-project-grid { grid-template-columns: 1fr; }
   .featured-project { min-height: 0; padding: 18px; }

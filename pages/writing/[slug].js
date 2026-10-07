@@ -48,6 +48,20 @@ export default function ArticlePage({ article }) {
             </section>
           ))}
         </div>
+        {article.references?.length > 0 && (
+          <section className="article-references" aria-label="Sources and implementation evidence">
+            <h2>Sources &amp; implementation evidence</h2>
+            <ul>
+              {article.references.map((reference) => (
+                <li key={reference.url}>
+                  <a href={reference.url} target="_blank" rel="noreferrer">
+                    {reference.label} <ArrowUpRight aria-hidden="true" size={14} />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
         <div className="article-endcap">
           <span className="mono-label">MORE SYSTEMS THINKING</span>
           <Link className="text-link" href="/projects">Explore the project index <ArrowUpRight aria-hidden="true" size={15} /></Link>
