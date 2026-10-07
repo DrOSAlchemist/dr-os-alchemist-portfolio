@@ -27,6 +27,13 @@ const expertise = [
 
 const featuredProjects = [
   {
+    name: "agentic-sre-platform",
+    title: "Evidence-backed agentic SRE",
+    category: "SRE / AI GUARDRAILS / SECURE DELIVERY",
+    description: "An offline EC2 quota incident demonstrator with deterministic diagnosis, policy-bounded Terraform proposals, SQLite audit history and recovery verification. Includes 19 tests and a staged Argo CD, Keycloak, Harbor and Vault integration design; live AWS and AI integrations are not yet implemented.",
+    tags: ["Python", "SRE", "Terraform proposals", "AI guardrails", "GitOps roadmap"],
+  },
+  {
     name: "keda-scale-zero-gpu-inference",
     title: "Queue-driven GPU inference",
     category: "AI INFRASTRUCTURE / KUBERNETES / FINOPS",

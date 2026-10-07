@@ -24,6 +24,12 @@ Open `http://localhost:3000`. Run `npm run lint` and `npm run build` before publ
 
 The projects page reads `GITHUB_USERNAME` on the server, defaulting to `DrOSAlchemist`. It lists only public, non-fork, non-archived repositories and caches the response at the CDN for one hour. No GitHub token is needed or exposed to browsers.
 
+The home page also curates featured public repositories, including Agentic SRE
+Platform's offline quota investigation demo. Its card distinguishes implemented
+diagnosis, proposal and recovery controls from the planned live AWS, AI and secure
+GitOps integrations. Featured cards appear only when their repositories are present
+in the public GitHub response.
+
 ## Netlify
 
 `netlify.toml` sets the production build command and Node version. Netlify detects Next.js and applies its maintained adapter automatically; this project intentionally does not pin an adapter version. To enable continuous deployment, connect this GitHub repository as a site in the Netlify dashboard and select `main` as the production branch. Netlify will build production deploys from `main` and deploy previews for pull requests. The GitHub Actions workflow independently runs lint and build checks.
