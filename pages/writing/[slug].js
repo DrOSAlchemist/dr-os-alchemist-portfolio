@@ -36,20 +36,35 @@ export default function ArticlePage({ article }) {
           <time dateTime={article.date}>{article.date}</time>
           <span>{article.readTime}</span>
         </div>
+        <nav className="article-toc" aria-label="In this field note">
+          <h2>In this field note</h2>
+          <ol>
+            {article.sections.map((section, index) => (
+              <li key={section.heading}><a href={`#section-${index + 1}`}>{section.heading}</a></li>
+            ))}
+          </ol>
+          {article.references?.length > 0 && <a href="#implementation-evidence">Sources &amp; implementation evidence</a>}
+        </nav>
         <div className="article-body">
-          {article.sections.map((section) => (
-            <section key={section.heading}>
+          {article.sections.map((section, index) => (
+            <section key={section.heading} id={`section-${index + 1}`}>
               <h2>{section.heading}</h2>
               {section.paragraphs?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               {section.bullets && (
                 <ul>{section.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
               )}
               {section.callout && <blockquote className="article-callout">{section.callout}</blockquote>}
+              {section.code && (
+                <figure className="article-code">
+                  <figcaption>{section.code.caption}</figcaption>
+                  <pre tabIndex={0} aria-label={section.code.caption}><code>{section.code.text}</code></pre>
+                </figure>
+              )}
             </section>
           ))}
         </div>
         {article.references?.length > 0 && (
-          <section className="article-references" aria-label="Sources and implementation evidence">
+          <section id="implementation-evidence" className="article-references" aria-label="Sources and implementation evidence">
             <h2>Sources &amp; implementation evidence</h2>
             <ul>
               {article.references.map((reference) => (

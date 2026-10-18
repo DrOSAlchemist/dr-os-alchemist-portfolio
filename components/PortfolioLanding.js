@@ -61,7 +61,7 @@ const toolGroups = [
   { title: "Cloud & infrastructure", items: ["AWS Route 53", "Azure DNS", "Google Cloud DNS", "Cloudflare", "TCPWave"] },
   { title: "AI & Kubernetes", items: ["Kubernetes", "KEDA", "vLLM", "FastAPI", "Redis", "Helm"] },
   { title: "Code & verification", items: ["Python", "JavaScript", "SQLite", "GitHub Actions", "Ruff", "Bandit", "Independent verification"] },
-  { title: "Delivery & security design", items: ["Docker", "HCL / Terraform", "AI policy contracts", "GitOps architecture", "Recovery runbooks"] },
+  { title: "Delivery & security design", items: ["Docker", "HCL / Terraform", "OPA", "Checkov", "Trivy", "AI policy contracts", "GitOps architecture", "Recovery runbooks"] },
 ];
 
 const engineeringPractices = [
@@ -70,9 +70,7 @@ const engineeringPractices = [
   { title: "Expose the proof", text: "Link code, tests and dated measurements. Label reference designs and roadmap work as such." },
 ];
 
-export default function PortfolioLanding({ repos, username, unavailable }) {
-  const repoByName = new Map(repos.map((repo) => [repo.name, repo]));
-
+export default function PortfolioLanding({ repos, unavailable }) {
   return (
     <>
       <Head>
@@ -109,7 +107,7 @@ export default function PortfolioLanding({ repos, username, unavailable }) {
               </Link>
             </div>
             <div className="resume-stats" aria-label="Portfolio at a glance">
-              <div><strong>{unavailable ? "Unavailable" : repos.length}</strong><span>Live public repository count</span></div>
+              <div><strong>{unavailable ? "Unavailable" : repos.length}</strong><span>Public repositories · cached metadata</span></div>
               <div><strong>{articles.length}</strong><span>Field notes</span></div>
               <div><strong>AI · SRE · CLOUD</strong><span>Areas of focus</span></div>
             </div>
@@ -125,6 +123,16 @@ export default function PortfolioLanding({ repos, username, unavailable }) {
             <figcaption><span className="mono-label">SYSTEMS PRACTICE / 001</span><span>Independent · Open source</span></figcaption>
           </figure>
         </section>
+
+        <nav className="section-nav site-shell" aria-label="Homepage sections">
+          <span className="mono-label">On this page</span>
+          <a href="#github">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#automations">Automation</a>
+          <a href="#experience">Experience</a>
+          <a href="#tools">Tools</a>
+          <a href="#contact">Contact</a>
+        </nav>
 
         <section className="engineering-practices site-shell" aria-label="Engineering approach">
           {engineeringPractices.map((practice) => (
@@ -192,7 +200,7 @@ export default function PortfolioLanding({ repos, username, unavailable }) {
                 <span className="mono-label">DNS / IPAM</span>
                 <h3>DNS changes with a recovery path.</h3>
                 <p>Validate records, compare desired and live state, snapshot before writes, and check propagation after the change.</p>
-                <a className="text-link" href={repoByName.get("dns-migration-automation")?.url || `https://github.com/${username}/dns-migration-automation`} target="_blank" rel="noreferrer">
+                <a className="text-link" href="https://github.com/DrOSAlchemist/dns-migration-automation" target="_blank" rel="noreferrer">
                   DNS migration automation <ArrowUpRight aria-hidden="true" size={15} />
                 </a>
               </article>

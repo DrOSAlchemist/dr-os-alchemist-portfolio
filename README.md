@@ -23,7 +23,11 @@ npm run dev
 Open `http://localhost:3000`. Run `npm test`, `npm run lint`, `npm run build` and then `npm run test:rendered` before publishing.
 Content tests use Node's built-in runner without additional test dependencies.
 
-The projects page reads `GITHUB_USERNAME` on the server, defaulting to `DrOSAlchemist`. It lists only public, non-fork, non-archived repositories and caches the response at the CDN for one hour. No GitHub token is needed or exposed to browsers.
+The projects page reads `GITHUB_USERNAME` on the server, defaulting to `DrOSAlchemist`. It lists only public, non-fork, non-archived repositories. Search matches all entered terms across names, descriptions and topics; language filtering and recent/name/star sorting run locally without additional API requests. The initial HTML includes the full fetched list, so repository links remain available without JavaScript.
+
+The server fetches up to five 100-item GitHub pages using a shared six-second deadline, validates the response fields used by the UI, deduplicates page overlaps and sorts by push time. It requests an additional page when a page is full; exhausting the bound fails visibly rather than presenting a partial account count as complete. Concurrent upstream changes can still shift pagination; this is a public directory, not an atomic account snapshot. No GitHub token is needed or exposed to browsers.
+
+Successful responses allow one-hour CDN caching plus stale-while-revalidate for up to one day; the actual edge cache behavior depends on the hosting adapter. Failed lookups return a visible unavailable state, log a bounded reason/status without response bodies, and use `Cache-Control: no-store` so an outage response is not cached as an empty account. Rate limits, malformed data, timeout, API errors and pagination limits are tested. There is no persistent last-good snapshot or retry loop; curated evidence and a direct profile link remain the fallback.
 
 The home page also curates featured public repositories, including Agentic SRE
 Platform's offline quota investigation demo. Its card distinguishes implemented
@@ -45,10 +49,28 @@ agent-independent runbook.
 benchmark scope, offline SRE boundaries and article reference contracts. These
 checks are not a vulnerability audit, live deployment test or external-link monitor.
 After a production build, `npm run test:rendered` starts its own loopback server on
-an OS-assigned port, verifies home/projects rendering when the live account lookup
-fails, checks article evidence and the sitemap, and stops that server. It requires
-outbound access to the public GitHub API; a network failure follows the same
-unavailable path. CI runs it after the build.
+an OS-assigned port, verifies home/projects rendering during both successful and failed
+account lookups, checks article evidence, code blocks, section anchors, escaped API
+content, navigation and the sitemap, and stops that server. A test-only Node preload
+intercepts GitHub fetches inside that subprocess; these checks need no GitHub network
+access and add no production mock mode. CI runs them after the build.
+
+## Engineering case studies and navigation
+
+The DevSecOps case study connects the delivery contract to actual Terraform test
+events, OPA mutation tests, the runtime-image remediation and a dated CI run.
+Its immutable revision links distinguish historical evidence from the moving main
+branch. It states that Snyk was skipped, Azure was not deployed, branch protection
+is a separate administrative control and artifacts expire. Do not update a
+verification claim without checking its linked revision and run.
+
+Long field notes have a table of contents, stable per-section anchor targets and
+keyboard-scrollable code examples. Add optional `code: { caption, text }` to an
+article section for plain-text snippets; React escapes them rather than injecting
+HTML. The primary navigation exposes projects, writing and about directly, marks
+the active route and includes a keyboard skip-to-content link. Home-section links
+remain available for skills and automation. Preserve the existing brand rather
+than adding unsupported certifications, employment claims or performance metrics.
 
 ## Netlify
 

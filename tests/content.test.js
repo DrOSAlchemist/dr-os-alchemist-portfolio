@@ -14,7 +14,26 @@ test("curated projects have unique identities, evidence and explicit limitations
     assert.match(projectUrl(project), /^https:\/\/github\.com\/DrOSAlchemist\/[a-z0-9-]+$/);
     assert.ok(new URL(evidenceUrl(project)).pathname.startsWith(`/DrOSAlchemist/${project.name}/`));
     if (project.noteSlug) assert.ok(getArticle(project.noteSlug), `Missing note: ${project.noteSlug}`);
+    if (project.verificationUrl) {
+      assert.ok(project.verificationLabel);
+      assert.match(project.verificationUrl, /^https:\/\/github\.com\/DrOSAlchemist\/[a-z0-9-]+\/actions\/runs\/\d+$/);
+    }
   }
+});
+
+test("DevSecOps case study links a dated revision and preserves deployment boundaries", () => {
+  const project = featuredProjects.find((item) => item.name === "azure-devsecops-policy-pipeline");
+  const note = getArticle(project.noteSlug);
+  assert.match(project.evidence, /11 Node tests, 12 OPA tests/);
+  assert.match(project.limitation, /Snyk was skipped/);
+  assert.match(project.limitation, /No Azure deployment/);
+  assert.ok(note.references.some((item) => item.url === project.verificationUrl));
+  assert.ok(note.references.some((item) => item.url.includes("/blob/4aefdf1")));
+  const text = JSON.stringify(note.sections);
+  for (const boundary of [/not the built application image/, /seven days/, /branch protection/, /not a cryptographic attestation/, /not a demo step/]) {
+    assert.match(text, boundary);
+  }
+  assert.ok(note.sections.filter((section) => section.code).length >= 2);
 });
 
 test("GPU result is scoped and consistent with the linked research record", () => {
@@ -45,6 +64,14 @@ test("articles have unique routable slugs and valid, named HTTPS references", ()
     assert.match(article.slug, /^[a-z0-9-]+$/);
     assert.match(article.date, /^\d{4}-\d{2}-\d{2}$/);
     assert.ok(article.sections.length > 0);
+    assert.equal(new Set(article.sections.map((section) => section.heading)).size, article.sections.length);
+    for (const section of article.sections) {
+      assert.ok(section.heading.trim());
+      if (section.code) {
+        assert.ok(section.code.caption.trim());
+        assert.ok(section.code.text.trim());
+      }
+    }
     for (const reference of article.references || []) {
       assert.ok(reference.label.trim());
       assert.equal(new URL(reference.url).protocol, "https:");

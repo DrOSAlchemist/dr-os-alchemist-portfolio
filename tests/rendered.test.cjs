@@ -4,12 +4,13 @@ const { once } = require("node:events");
 const path = require("node:path");
 const { test } = require("node:test");
 
-test("production pages retain evidence during a GitHub API failure", { timeout: 30000 }, async () => {
+async function withPreview(feed, check) {
   const server = spawn(process.execPath, [
+    "--import", path.resolve("tests/fixtures/github-fetch.mjs"),
     path.resolve("node_modules/next/dist/bin/next"),
     "start", "--hostname", "127.0.0.1", "--port", "0",
   ], {
-    env: { ...process.env, GITHUB_USERNAME: "portfolio-evidence-test-nonexistent-account" },
+    env: { ...process.env, GITHUB_USERNAME: "DrOSAlchemist", PORTFOLIO_TEST_FEED: feed },
     stdio: ["ignore", "pipe", "pipe"],
   });
   let output = "";
@@ -33,23 +34,7 @@ test("production pages retain evidence during a GitHub API failure", { timeout: 
       server.stdout.on("data", collect);
       server.stderr.on("data", collect);
     });
-    const routes = ["/", "/projects", "/writing/evidence-backed-agentic-sre", "/sitemap.xml"];
-    const pages = await Promise.all(routes.map(async (route) => {
-      const response = await fetch(`${baseUrl}${route}`, { signal: AbortSignal.timeout(10000) });
-      assert.equal(response.status, 200, route);
-      return response.text();
-    }));
-    for (const html of pages.slice(0, 2)) {
-      assert.equal((html.match(/class="featured-project"/g) || []).length, 6);
-      assert.match(html, /Unavailable/);
-      assert.match(html, /659 → 338/);
-      assert.doesNotMatch(html, /cloud performance is not yet benchmarked/);
-      assert.match(html, /https:\/\/github\.com\/DrOSAlchemist\/agentic-sre-platform/);
-    }
-    assert.match(pages[0], /GitHub live metadata is unavailable/);
-    assert.match(pages[2], /Sources &amp; implementation evidence/);
-    assert.match(pages[2], /docs\/security-model\.md/);
-    assert.match(pages[3], /\/writing\/evidence-backed-agentic-sre/);
+    await check(baseUrl);
   } finally {
     if (server.exitCode === null && server.signalCode === null) {
       const exited = once(server, "exit");
@@ -57,4 +42,60 @@ test("production pages retain evidence during a GitHub API failure", { timeout: 
       await exited;
     }
   }
+}
+
+test("production pages retain evidence during a deterministic GitHub API failure", { timeout: 30000 }, async () => {
+  await withPreview("failure", async (baseUrl) => {
+    for (const route of ["/", "/projects"]) {
+      const response = await fetch(`${baseUrl}${route}`);
+      assert.equal(response.status, 200, route);
+      assert.equal(response.headers.get("cache-control"), "no-store");
+      const html = await response.text();
+      assert.equal((html.match(/class="featured-project"/g) || []).length, 7);
+      assert.match(html, /Unavailable/);
+      assert.match(html, /659 → 338/);
+      assert.match(html, /azure-devsecops-policy-pipeline/);
+      assert.match(html, /Skip to content/);
+      assert.match(html, /Curated/);
+    }
+  });
+});
+
+test("production repository controls render real counts, named metadata and escaped content", { timeout: 30000 }, async () => {
+  await withPreview("success", async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/projects`);
+    assert.equal(response.status, 200);
+    assert.match(response.headers.get("cache-control"), /s-maxage=3600/);
+    const html = await response.text();
+    assert.equal((html.match(/class="repo-card"/g) || []).length, 2);
+    for (const label of ["Search repositories", "Language", "Sort by", "Reset filters", "5 stars", "1 fork", "No push recorded"]) {
+      assert.ok(html.includes(label), label);
+    }
+    assert.match(html, /&lt;script&gt;not executable&lt;\/script&gt;/);
+    assert.doesNotMatch(html, /<script>not executable<\/script>/);
+    assert.match(html, /aria-current="page"[^>]*href="\/projects"/);
+  });
+});
+
+test("static case study exposes navigable sections, code and revision-backed evidence", { timeout: 30000 }, async () => {
+  await withPreview("success", async (baseUrl) => {
+    for (const route of ["/writing/devsecops-evidence-before-deployment", "/writing/evidence-backed-agentic-sre"]) {
+      const response = await fetch(`${baseUrl}${route}`);
+      assert.equal(response.status, 200);
+      const html = await response.text();
+      assert.match(html, /Sources &amp; implementation evidence/);
+      assert.match(html, /href="#section-1"/);
+      assert.match(html, /id="section-1"/);
+      assert.match(html, /href="#implementation-evidence"/);
+      if (route.includes("devsecops")) {
+        assert.match(html, /<pre/);
+        assert.match(html, /39172532890/);
+        assert.match(html, /blob\/4aefdf1/);
+      } else assert.match(html, /docs\/security-model\.md/);
+    }
+    const sitemap = await fetch(`${baseUrl}/sitemap.xml`);
+    assert.equal(sitemap.status, 200);
+    assert.match(await sitemap.text(), /\/writing\/devsecops-evidence-before-deployment/);
+    assert.equal((await fetch(`${baseUrl}/writing/no-such-note`)).status, 404);
+  });
 });

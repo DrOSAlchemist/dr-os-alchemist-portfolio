@@ -33,6 +33,11 @@ export default function FeaturedProjects() {
                 Design note <ArrowUpRight aria-hidden="true" size={14} />
               </Link>
             )}
+            {project.verificationUrl && (
+              <a className="text-link" href={project.verificationUrl} target="_blank" rel="noreferrer">
+                {project.verificationLabel} <ArrowUpRight aria-hidden="true" size={14} />
+              </a>
+            )}
           </div>
         </article>
       ))}

@@ -6,12 +6,11 @@ import BrandMark from "./BrandMark";
 import { siteUrl, socialImageUrl } from "@/lib/site";
 
 const navigation = [
-  { label: "GitHub", href: "/#github" },
+  { label: "Projects", href: "/projects" },
+  { label: "Writing", href: "/writing" },
+  { label: "About", href: "/about" },
   { label: "Skills", href: "/#skills" },
   { label: "Automation", href: "/#automations" },
-  { label: "Experience", href: "/#experience" },
-  { label: "Tools", href: "/#tools" },
-  { label: "Contact", href: "/#contact" },
 ];
 
 export default function SiteLayout({ children }) {
@@ -37,6 +36,7 @@ export default function SiteLayout({ children }) {
         <meta name="twitter:image" content={socialImageUrl} key="twitter-image" />
         <meta name="twitter:image:alt" content="DrOSAlchemist profile image" key="twitter-image-alt" />
       </Head>
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <div className="site-shell">
         <header className="site-header">
           <Link className="brand-home" href="/" aria-label="DrOSAlchemist home">
@@ -44,11 +44,13 @@ export default function SiteLayout({ children }) {
           </Link>
           <nav className="primary-nav" aria-label="Primary navigation">
             {navigation.map((item) => {
+              const active = !item.href.includes("#") && (canonicalPath === item.href || canonicalPath.startsWith(`${item.href}/`));
               return (
                 <Link
-                  className="nav-link"
+                  className={`nav-link${active ? " nav-link-active" : ""}`}
                   href={item.href}
                   key={item.href}
+                  aria-current={active ? "page" : undefined}
                 >
                   {item.label}
                 </Link>
@@ -59,7 +61,7 @@ export default function SiteLayout({ children }) {
             Let&apos;s connect <ArrowUpRight aria-hidden="true" size={15} />
           </Link>
         </header>
-        <main id="main-content">{children}</main>
+        <main id="main-content" tabIndex={-1}>{children}</main>
         <footer className="site-footer">
           <div className="footer-brand">
             <BrandMark compact />
