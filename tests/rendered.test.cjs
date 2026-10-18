@@ -98,4 +98,28 @@ test("static case study exposes navigable sections, code and revision-backed evi
     assert.match(await sitemap.text(), /\/writing\/devsecops-evidence-before-deployment/);
     assert.equal((await fetch(`${baseUrl}/writing/no-such-note`)).status, 404);
   });
+
+});
+
+test("About lab remains navigable without a live feed and exposes every exercise contract", { timeout: 30000 }, async () => {
+  await withPreview("failure", async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/about`);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.match(html, /About &amp; Engineering Lab/);
+    assert.match(html, /independent systems engineer/);
+    assert.match(html, /does not run code or provision resources/);
+    assert.equal((html.match(/class="lab-card"/g) || []).length, 3);
+    assert.equal((html.match(/<pre /g) || []).length, 3);
+    for (const id of ["operator", "lab-protocol", "lab-workbench", "evidence-contract", "delivery-policy", "portfolio-failure", "gpu-cold-start"]) {
+      assert.ok(html.includes(`href="#${id}"`), `Missing navigation: ${id}`);
+      assert.ok(html.includes(`id="${id}"`), `Missing section: ${id}`);
+    }
+    for (const label of ["Prerequisites", "Execution scope", "Expected observation", "Failure check", "Next experiment", "Boundary"]) {
+      assert.equal(html.split(`>${label}<`).length - 1, 3, label);
+    }
+    assert.match(html, /aria-current="page"[^>]*href="\/about"/);
+    assert.match(html, /Research inspection/);
+    assert.match(html, /not a hosted cloud sandbox/);
+  });
 });

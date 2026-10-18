@@ -5,7 +5,7 @@ A multi-page portfolio for AI/ML infrastructure, Kubernetes, network systems and
 ## Routes
 
 - `/` — systems-focused portfolio home
-- `/about` — profile, principles and areas of focus
+- `/about` — personal profile, engineering lab workbench, experiment protocol and evidence contract
 - `/projects` — curated evidence cards plus automatically refreshed public GitHub repositories for `DrOSAlchemist`
 - `/writing` — AI/ML, Kubernetes, security boundaries and networking field notes
 - `/writing/[slug]` — statically generated articles
@@ -56,6 +56,22 @@ intercepts GitHub fetches inside that subprocess; these checks need no GitHub ne
 access and add no production mock mode. CI runs them after the build.
 
 ## Engineering case studies and navigation
+
+The About page doubles as an engineering lab hub, not a browser execution
+environment. `lib/labs.js` defines three bounded exercises: pinned DevSecOps
+Node verification, portfolio failure-path verification and read-only GPU
+measurement inspection. Each records prerequisites, execution scope, exact
+commands, expected observations, a failure check, follow-up work and limitations.
+The DevSecOps starter does not run the complete scanner pipeline; the GPU exercise
+does not rerun a cloud benchmark. No lab command provisions cloud resources.
+
+Use fresh clone directories and review source before execution. The DevSecOps
+exercise pins the verified revision; the moving-main exercises print the checked
+out revision for the reader's notebook. Their outputs are expected observations,
+not a live lab-status dashboard. Keep source changes and these contracts aligned.
+`tests/labs.test.js` checks the exercise schema, scoped claims and absence of
+provisioning commands; production render tests verify all section targets and
+exercise fields even during feed failure.
 
 The DevSecOps case study connects the delivery contract to actual Terraform test
 events, OPA mutation tests, the runtime-image remediation and a dated CI run.

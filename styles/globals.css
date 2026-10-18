@@ -170,6 +170,27 @@ main { min-height: 70vh; }
 .page-lede { max-width: 680px; color: var(--ink-soft); font-size: 18px; line-height: 1.65; }
 .page-divider { width: 100%; height: 1px; margin: 45px 0; background: var(--line); }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 75px; }
+.lab-navigation { margin-block: 28px 40px; }
+.lab-section { margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line); }
+.lab-section h2 { max-width: 800px; margin: 12px 0 20px; font-size: clamp(28px, 4vw, 42px); line-height: 1.15; }
+.lab-protocol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 40px; padding-left: 22px; margin-top: 28px; }
+.lab-protocol li { padding-left: 6px; }
+.lab-protocol li::marker { color: var(--blue); font-family: var(--mono); }
+.lab-protocol h3, .lab-evidence-grid h3 { font-size: 18px; margin: 0 0 10px; }
+.lab-protocol p, .lab-evidence-grid li { color: var(--ink-soft); font-size: 14px; line-height: 1.8; }
+.lab-jump-links { display: flex; flex-wrap: wrap; gap: 16px 24px; margin-block: 28px; }
+.lab-workbench { display: grid; gap: 24px; }
+.lab-card { min-width: 0; padding: clamp(18px, 4vw, 36px); border: 1px solid var(--line); background: var(--paper-bright); }
+.lab-card h3 { margin: 18px 0 12px; font-size: clamp(23px, 3vw, 31px); line-height: 1.2; }
+.lab-question { font-size: 18px; line-height: 1.6; color: var(--ink-soft); }
+.lab-contract { display: grid; gap: 18px; margin-block: 24px; }
+.lab-contract > div { display: grid; grid-template-columns: minmax(0, 160px) minmax(0, 1fr); gap: 16px; }
+.lab-contract dt { font-family: var(--mono); font-size: 11px; color: var(--blue); }
+.lab-contract dd { margin: 0; color: var(--ink-soft); font-size: 14px; line-height: 1.8; overflow-wrap: anywhere; }
+.lab-evidence-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; margin-block: 28px; }
+.lab-evidence-grid ul { padding-left: 20px; }
+.lab-evidence-grid li + li { margin-top: 10px; }
+.lab-section[id], .lab-card[id], #operator { scroll-margin-top: 24px; }
 .prose p { color: var(--ink-soft); font-size: 16px; line-height: 1.8; }
 .prose p + p { margin-top: 20px; }
 .principle-list { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
@@ -396,6 +417,8 @@ main { min-height: 70vh; }
 }
 
 @media (max-width: 620px) {
+  .lab-protocol, .lab-evidence-grid, .lab-contract > div { grid-template-columns: 1fr; }
+  .lab-contract > div { gap: 6px; }
   .site-shell { width: min(100% - 30px, 1280px); }
   .site-header { min-height: 76px; gap: 9px; }
   .brand-lockup { gap: 7px; }
