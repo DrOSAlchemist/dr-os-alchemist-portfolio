@@ -108,6 +108,10 @@ test("About lab remains navigable without a live feed and exposes every exercise
     const html = await response.text();
     assert.match(html, /About &amp; Engineering Lab/);
     assert.match(html, /independent systems engineer/);
+    assert.match(html, /network\s+engineer/);
+    assert.match(html, /pursuing a Doctor of Information Technology \(DIT\)/);
+    assert.match(html, /DevSecOps, SRE, Kubernetes/);
+    assert.doesNotMatch(html, /DIT candidate|production-grade systems|proves its own correctness|doctoral research/);
     assert.match(html, /does not run code or provision resources/);
     assert.equal((html.match(/class="lab-card"/g) || []).length, 3);
     assert.equal((html.match(/<pre /g) || []).length, 3);

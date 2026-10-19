@@ -10,14 +10,14 @@ const principles = [
   { number: "03", title: "Secure the seams", text: "Identity, policy and network boundaries matter most where components meet." },
 ];
 
-const skills = ["Kubernetes", "AI / ML infrastructure", "Python / APIs", "GPU scheduling", "DNS & IPAM", "Security controls", "CI verification", "GitOps design"];
+const skills = ["Network engineering", "DevSecOps", "SRE", "Kubernetes", "AI / ML infrastructure", "Python / APIs", "Automation", "DNS & IPAM", "Security controls", "CI verification", "GitOps design"];
 
 export default function About() {
   return (
     <>
       <Head>
         <title>About &amp; Engineering Lab | DrOSAlchemist</title>
-        <meta name="description" content="Inside DrOSAlchemist's engineering practice: reproducible local labs, failure-path verification, GPU research and explicit evidence boundaries." />
+        <meta name="description" content="DrOSAlchemist's systems and network engineering practice: DevSecOps, SRE, Kubernetes, automation, ongoing DIT study and reproducible local labs." />
         <meta property="og:title" content="About & Engineering Lab | DrOSAlchemist" key="og-title" />
         <meta property="og:description" content="Personal engineering practice with reproducible experiments, inspectable evidence and honest limitations." key="og-description" />
       </Head>
@@ -33,16 +33,25 @@ export default function About() {
         <div className="about-grid" id="operator">
           <div className="prose">
             <p>
-              I&apos;m DrOSAlchemist, an independent systems engineer. My
-              work lives at the intersection of model infrastructure, Kubernetes,
-              networking and security: the pieces that make a platform useful
+              I&apos;m DrOSAlchemist, an independent systems engineer and network
+              engineer. My practice connects DevSecOps, SRE, Kubernetes, model
+              infrastructure and secure network design: the infrastructure,
+              identity, automation and policy that make a platform useful
               after the demo is over.
+            </p>
+            <p>
+              I&apos;m pursuing a Doctor of Information Technology (DIT).
+              Alongside that study, my engineering questions focus on latency,
+              failure, identity boundaries, policy enforcement and operational
+              drift. I use the lab to test assumptions and separate what I
+              expect a system to do from what the evidence actually shows.
             </p>
             <p>
               I like problems that cross boundaries. A model needs a GPU, a
               scheduler needs a capacity contract, a service needs a name and an
-              address, and every change needs a way to be seen and reversed.
-              Connecting those details is where reliable systems take shape.
+              address, and a secure network path. Every change needs a way to
+              be observed, validated and reversed. Connecting those details is
+              where reliable systems take shape.
             </p>
             <p>
               This portfolio connects implementation to evidence: source code,
@@ -52,9 +61,11 @@ export default function About() {
             </p>
             <p>
               This is also my engineering lab: a place to turn a systems question
-              into a bounded experiment, test the refusal path and make the
-              result inspectable. I prefer a small, reproducible claim to a large
-              architecture story with no working verification.
+              into a bounded experiment, test the failure and refusal paths,
+              and make the result inspectable. I ask which contract defines
+              the boundary, which control enforces it and which network
+              conditions affect the outcome. I prefer a small, reproducible
+              claim to a large architecture story with no working verification.
             </p>
             <a className="button button-dark" href="#lab-workbench">Explore the lab workbench <ArrowUpRight aria-hidden="true" size={16} /></a>
             <div className="skill-cloud" aria-label="Areas of focus">
