@@ -7,6 +7,7 @@ A multi-page portfolio for AI/ML infrastructure, Kubernetes, network systems and
 - `/` — systems-focused portfolio home
 - `/about` — personal profile, engineering lab workbench, experiment protocol and evidence contract
 - `/projects` — curated evidence cards plus automatically refreshed public GitHub repositories for `DrOSAlchemist`
+- `/projects/alchemist-sentinel` — fixed, read-only synthetic Kubernetes incident replay
 - `/writing` — AI/ML, Kubernetes, security boundaries and networking field notes
 - `/writing/[slug]` — statically generated articles
 - `/contact` — public GitHub contact route
@@ -56,6 +57,26 @@ intercepts GitHub fetches inside that subprocess; these checks need no GitHub ne
 access and add no production mock mode. CI runs them after the build.
 
 ## Engineering case studies and navigation
+
+### Alchemist Sentinel replay
+
+The Sentinel card is shared by the home and projects pages and links to the
+statically rendered `/projects/alchemist-sentinel` route and the separate
+[source repository](https://github.com/DrOSAlchemist/alchemist-sentinel).
+`lib/sentinel.js` holds three authored synthetic records: workload context, an
+unexpected `/bin/sh` process and a denied outbound connection to a
+documentation-only IP address. Two local exact-match rules scope findings to the
+fixture namespace and pod. They do not prove compromise, process-to-flow causation
+or exfiltration. Hypotheses are editorial investigation prompts, not AI output.
+
+The replay banner, UTC timeline, expandable JSON evidence and review-only
+remediation plan remain readable without JavaScript or the GitHub feed. There is
+no cluster integration, model call, credential input, execution API, persistence
+or mutable public state. Expanding evidence only changes local presentation.
+No claim is made about the separate repository's tests or live runtime.
+`tests/sentinel.test.js` checks fixture ordering, deterministic evidence links,
+negative rule cases and replay boundaries; rendered tests check discovery,
+section anchors, canonical metadata, active navigation and sitemap inclusion.
 
 The About page doubles as an engineering lab hub, not a browser execution
 environment. `lib/labs.js` defines three bounded exercises: pinned DevSecOps

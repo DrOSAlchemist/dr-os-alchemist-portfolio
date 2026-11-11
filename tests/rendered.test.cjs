@@ -51,13 +51,37 @@ test("production pages retain evidence during a deterministic GitHub API failure
       assert.equal(response.status, 200, route);
       assert.equal(response.headers.get("cache-control"), "no-store");
       const html = await response.text();
-      assert.equal((html.match(/class="featured-project"/g) || []).length, 7);
+      assert.equal((html.match(/class="featured-project"/g) || []).length, 8);
+      assert.match(html, /href="\/projects\/alchemist-sentinel"/);
       assert.match(html, /Unavailable/);
       assert.match(html, /659 → 338/);
       assert.match(html, /azure-devsecops-policy-pipeline/);
       assert.match(html, /Skip to content/);
       assert.match(html, /Curated/);
     }
+  });
+});
+
+test("Sentinel replay renders evidence and review boundaries without live dependencies", { timeout: 30000 }, async () => {
+  await withPreview("failure", async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/projects/alchemist-sentinel`);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    for (const text of [
+      "Replay only · synthetic evidence", "Unexpected shell observed", "Outbound connection blocked",
+      "Deterministic findings", "Hypotheses, not conclusions", "Review-only remediation",
+      "No real AI inference", "not a live cluster", "not AI output", "203.0.113.42:443",
+    ]) assert.ok(html.includes(text), text);
+    for (const id of ["evidence-timeline", "deterministic-findings", "hypotheses", "review-plan", "evidence-E02", "evidence-E03"]) {
+      assert.ok(html.includes(`href="#${id}"`), id);
+      assert.ok(html.includes(`id="${id}"`), id);
+    }
+    assert.equal((html.match(/<details>/g) || []).length, 3);
+    assert.match(html, /aria-current="page"[^>]*href="\/projects"/);
+    assert.match(html, /href="https:\/\/github.com\/DrOSAlchemist\/alchemist-sentinel"/);
+    assert.match(html, /rel="canonical" href="https:\/\/drosalchemist.net\/projects\/alchemist-sentinel"/);
+    assert.doesNotMatch(html, /<form\b|<button\b|<iframe\b/);
+    assert.match(await (await fetch(`${baseUrl}/sitemap.xml`)).text(), /\/projects\/alchemist-sentinel/);
   });
 });
 

@@ -1,7 +1,8 @@
 import { articles } from "@/lib/articles";
 import { siteUrl } from "@/lib/site";
+import { sentinelPath } from "@/lib/sentinel";
 
-const staticPaths = ["/", "/about", "/projects", "/contact", "/writing"];
+const staticPaths = ["/", "/about", "/projects", sentinelPath, "/contact", "/writing"];
 
 function escapeXml(value) {
   return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");

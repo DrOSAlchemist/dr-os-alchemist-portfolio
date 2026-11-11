@@ -22,6 +22,11 @@ export default function FeaturedProjects() {
           </dl>
           <div className="resume-tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
           <div className="project-links">
+            {project.demoPath && (
+              <Link className="text-link" href={project.demoPath}>
+                Explore synthetic replay <ArrowUpRight aria-hidden="true" size={14} />
+              </Link>
+            )}
             <a className="text-link" href={projectUrl(project)} target="_blank" rel="noreferrer">
               Source code <ArrowUpRight aria-hidden="true" size={14} />
             </a>
